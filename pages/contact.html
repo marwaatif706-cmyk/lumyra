@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMYRA – Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<canvas id="particles-canvas"></canvas>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-logo"><a href="../index.html"><span class="logo-l">L</span>UMYRA</a></div>
+  <ul class="nav-links">
+    <li><a href="../index.html" class="nav-link">Accueil</a></li>
+    <li><a href="about.html" class="nav-link">À Propos</a></li>
+    <li><a href="products.html" class="nav-link">Produits</a></li>
+    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="cart.html" class="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count" id="cart-count">0</span></a>
+    <a href="login.html" class="btn-nav" id="auth-btn">Se connecter</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Accueil</a>
+  <a href="about.html">À Propos</a>
+  <a href="products.html">Produits</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-header">
+  <div style="position:absolute;inset:0;background:url('../images/candle_glass.jpeg') center/cover;opacity:0.2;"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(62,32,16,0.9),rgba(107,66,38,0.7));"></div>
+  <div class="page-header-content">
+    <div class="section-label" style="color:var(--gold-light);margin-bottom:0.7rem;">Nous écrire</div>
+    <h1>Nous <em>Contacter</em></h1>
+    <p>Nous sommes là pour vous répondre</p>
+  </div>
+</div>
+
+<section class="contact-page">
+  <div class="contact-layout">
+    <div class="contact-info reveal-left">
+      <h2>Parlons de <em style="color:var(--gold);font-style:italic;">LUMYRA</em></h2>
+      <p>Vous avez une question sur nos produits, votre commande ou vous souhaitez simplement en savoir plus ? Notre équipe est là pour vous accompagner.</p>
+      <div class="contact-detail">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        contact@lumyra.com
+      </div>
+      <div class="contact-detail">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @lumyra_urx
+      </div>
+      <div style="margin-top:2rem;">
+        <img src="../images/thank_you_card.jpeg" alt="LUMYRA card" style="width:100%;height:220px;object-fit:cover;border-radius:4px;border:1px solid var(--beige-dark);">
+      </div>
+    </div>
+    <div class="reveal-up delay-2">
+      <div class="success-msg" id="contact-success" style="display:none;">✓ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.</div>
+      <div class="form-group">
+        <label>Nom complet</label>
+        <input type="text" id="c-name" placeholder="Votre nom">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="c-email" placeholder="votre@email.com">
+      </div>
+      <div class="form-group">
+        <label>Sujet</label>
+        <input type="text" id="c-subject" placeholder="Objet de votre message">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="c-message" placeholder="Écrivez votre message ici..."></textarea>
+      </div>
+      <button class="btn-primary" onclick="sendMessage()">Envoyer le message</button>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="footer-logo"><span class="logo-l">L</span>UMYRA</div><p>Tiny flame, huge impact.</p></div>
+    <div class="footer-links"><h5>Navigation</h5><a href="../index.html">Accueil</a><a href="products.html">Produits</a></div>
+    <div class="footer-links"><h5>Légal</h5><a href="#">Confidentialité</a><a href="#">CGV</a></div>
+    <div class="footer-links"><h5>Contact</h5><a href="mailto:contact@lumyra.com">contact@lumyra.com</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 LUMYRA. Tous droits réservés.</p></div>
+</footer>
+
+<script src="../js/db.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+<script>
+function sendMessage() {
+  const name = document.getElementById('c-name').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const subject = document.getElementById('c-subject').value.trim();
+  const message = document.getElementById('c-message').value.trim();
+  if (!name || !email || !message) {
+    DB.showToast('Veuillez remplir tous les champs obligatoires.');
+    return;
+  }
+
+  // Save message to localStorage
+  const messages = JSON.parse(localStorage.getItem('lumyra_messages') || '[]');
+  messages.unshift({ id: 'MSG_' + Date.now(), name, email, subject, message, date: new Date().toISOString(), read: false });
+  localStorage.setItem('lumyra_messages', JSON.stringify(messages));
+
+  document.getElementById('contact-success').style.display = 'block';
+  document.getElementById('c-name').value = '';
+  document.getElementById('c-email').value = '';
+  document.getElementById('c-subject').value = '';
+  document.getElementById('c-message').value = '';
+}
+</script>
+</body>
+</html>

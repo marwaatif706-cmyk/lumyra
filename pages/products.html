@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMYRA – Produits</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<canvas id="particles-canvas"></canvas>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-logo"><a href="../index.html"><span class="logo-l">L</span>UMYRA</a></div>
+  <ul class="nav-links">
+    <li><a href="../index.html" class="nav-link">Accueil</a></li>
+    <li><a href="about.html" class="nav-link">À Propos</a></li>
+    <li><a href="products.html" class="nav-link active">Produits</a></li>
+    <li><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="cart.html" class="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count" id="cart-count">0</span></a>
+    <a href="login.html" class="btn-nav" id="auth-btn">Se connecter</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Accueil</a>
+  <a href="about.html">À Propos</a>
+  <a href="products.html">Produits</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-header" style="background-image:none;">
+  <div style="position:absolute;inset:0;background:url('../images/candle_dark.jpeg') center/cover;opacity:0.25;"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(62,32,16,0.88),rgba(107,66,38,0.75));"></div>
+  <div class="page-header-content">
+    <div class="section-label" style="color:var(--gold-light);margin-bottom:0.7rem;">Notre Collection</div>
+    <h1>Nos <em>Produits</em></h1>
+    <p>L'innovation au service de votre bien-être</p>
+  </div>
+</div>
+
+<section class="products-page">
+  <div class="products-page-grid" id="products-grid">
+    <!-- Populated by JS -->
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-label reveal-up">Questions fréquentes</div>
+  <h2 class="section-title reveal-up delay-1">FAQ</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Est-elle sécurisée ? <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>Oui, LUMYRA est conçue selon des normes de sécurité rigoureuses. Chaque bougie est testée pour garantir une combustion sûre et contrôlée.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Quelle est sa durée de vie ? <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>La version Classic offre environ 40 heures de combustion. La Mini environ 25 heures.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Convient-elle aux petites pièces ? <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>Oui, en particulier la Mini est parfaitement adaptée aux petits espaces comme les chambres et les bureaux.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Livrez-vous dans tout le Maroc ? <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>Oui, nous assurons la livraison dans tout le Maroc. Délai estimé : 2 à 5 jours ouvrables selon votre région.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Quels modes de paiement acceptez-vous ? <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>Nous acceptons le paiement à la livraison (cash on delivery) et le paiement en ligne sécurisé.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="product-modal" style="display:none;position:fixed;inset:0;background:rgba(26,26,26,0.7);z-index:5000;display:none;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(8px);">
+  <div style="background:var(--white);border-radius:6px;max-width:750px;width:100%;overflow:hidden;position:relative;display:grid;grid-template-columns:1fr 1fr;" id="modal-inner">
+    <div style="height:100%;min-height:350px;" id="modal-img"></div>
+    <div style="padding:2.5rem;" id="modal-info"></div>
+    <button onclick="closeModal()" style="position:absolute;top:1rem;right:1rem;background:var(--cream);border:none;border-radius:50%;width:32px;height:32px;font-size:1.2rem;cursor:pointer;color:var(--brown-dark);">✕</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo"><span class="logo-l">L</span>UMYRA</div>
+      <p>Tiny flame, huge impact.</p>
+    </div>
+    <div class="footer-links"><h5>Navigation</h5><a href="../index.html">Accueil</a><a href="about.html">À Propos</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links"><h5>Légal</h5><a href="#">Confidentialité</a><a href="#">CGV</a></div>
+    <div class="footer-links"><h5>Contact</h5><a href="mailto:contact@lumyra.com">contact@lumyra.com</a><a href="https://instagram.com/lumyra_urx">@lumyra_urx</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 LUMYRA. Tous droits réservés.</p></div>
+</footer>
+
+<script src="../js/db.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+<script>
+// Render products
+const grid = document.getElementById('products-grid');
+if (grid) {
+  grid.innerHTML = DB.products.map(p => `
+    <div class="product-card reveal-up" style="cursor:none;">
+      <div class="product-img" onclick="openModal(${p.id})" style="cursor:none;">
+        <img src="${p.image}" alt="${p.name}" loading="lazy">
+        ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+        <div style="position:absolute;inset:0;background:rgba(107,66,38,0.0);display:flex;align-items:center;justify-content:center;transition:0.3s;opacity:0;" class="product-hover-overlay">
+          <span style="color:white;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;">Voir détails</span>
+        </div>
+      </div>
+      <div class="product-info">
+        <h3>${p.name}</h3>
+        <p>${p.description}</p>
+        <p style="font-size:0.75rem;color:var(--gold-dark);margin-bottom:0.5rem;">⏱ Durée: ${p.burnTime}</p>
+        <div class="product-footer">
+          <div class="product-price">${p.price} MAD</div>
+          <button class="btn-add-cart" onclick="DB.addToCart(${p.id})">+ Panier</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('.product-img').forEach(img => {
+    const overlay = img.querySelector('.product-hover-overlay');
+    if (overlay) {
+      img.addEventListener('mouseenter', () => { overlay.style.opacity = '1'; overlay.style.background = 'rgba(107,66,38,0.4)'; });
+      img.addEventListener('mouseleave', () => { overlay.style.opacity = '0'; overlay.style.background = 'rgba(107,66,38,0)'; });
+    }
+  });
+
+  grid.querySelectorAll('.reveal-up').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.1}s`;
+    revealObserver.observe(el);
+  });
+}
+
+function openModal(id) {
+  const p = DB.products.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('modal-img').innerHTML = `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;min-height:400px;">`;
+  document.getElementById('modal-info').innerHTML = `
+    <div style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.7rem;">Collection LUMYRA</div>
+    <h2 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:300;color:var(--brown-dark);margin-bottom:1rem;">${p.name}</h2>
+    <p style="font-size:0.85rem;line-height:1.8;color:var(--gray);margin-bottom:1.5rem;">${p.longDesc}</p>
+    <div style="display:flex;gap:2rem;margin-bottom:1.5rem;">
+      <div><div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.3rem;">Durée</div><div style="font-size:0.9rem;color:var(--brown)">${p.burnTime}</div></div>
+      <div><div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.3rem;">Taille</div><div style="font-size:0.9rem;color:var(--brown)">${p.size}</div></div>
+      <div><div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.3rem;">Stock</div><div style="font-size:0.9rem;color:var(--brown)">${p.stock} unités</div></div>
+    </div>
+    <div style="font-family:var(--font-serif);font-size:2rem;font-weight:600;color:var(--gold);margin-bottom:1.5rem;">${p.price} MAD</div>
+    <button class="btn-primary" onclick="DB.addToCart(${p.id});closeModal()">Ajouter au panier</button>
+  `;
+  const modal = document.getElementById('product-modal');
+  modal.style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('product-modal').style.display = 'none';
+}
+
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+window.onclick = (e) => {
+  const modal = document.getElementById('product-modal');
+  if (e.target === modal) closeModal();
+};
+</script>
+</body>
+</html>

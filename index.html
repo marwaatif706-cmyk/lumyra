@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMYRA – Tiny Flame, Huge Impact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- Floating Particles Background -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <span class="logo-l">L</span>UMYRA
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link active">Accueil</a></li>
+    <li><a href="pages/about.html" class="nav-link">À Propos</a></li>
+    <li><a href="pages/products.html" class="nav-link">Produits</a></li>
+    <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="pages/cart.html" class="cart-icon" id="cart-btn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-count" id="cart-count">0</span>
+    </a>
+    <a href="pages/login.html" class="btn-nav" id="auth-btn">Se connecter</a>
+  </div>
+  <button class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="pages/about.html">À Propos</a>
+  <a href="pages/products.html">Produits</a>
+  <a href="pages/contact.html">Contact</a>
+  <a href="pages/login.html">Se connecter</a>
+</div>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero" id="hero">
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="images/lumyra_video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal-up">Pure air. Soft light. Better living.</p>
+    <h1 class="hero-title reveal-up delay-1">
+      <span class="gold-text">Tiny flame,</span><br>
+      huge impact.
+    </h1>
+    <p class="hero-desc reveal-up delay-2">
+      LUMYRA est une bougie innovante qui élève votre espace tout en créant une atmosphère intérieure plus saine. L'élégance rencontre le bien-être.
+    </p>
+    <div class="hero-btns reveal-up delay-3">
+      <a href="pages/products.html" class="btn-primary">Découvrir</a>
+      <a href="pages/about.html" class="btn-ghost">Notre histoire</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ===== WHY LUMYRA ===== -->
+<section class="why-section" id="why">
+  <div class="section-label reveal-up">Pourquoi LUMYRA ?</div>
+  <h2 class="section-title reveal-up delay-1">Une innovation au service <br><em>de votre intérieur</em></h2>
+
+  <div class="features-grid">
+    <div class="feature-card reveal-up delay-1">
+      <div class="feature-icon">
+        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" stroke="#C8A97A" stroke-width="1"/><path d="M30 15 L30 35 M22 25 L30 15 L38 25" stroke="#C8A97A" stroke-width="1.5" stroke-linecap="round"/><circle cx="30" cy="40" r="4" fill="#C8A97A" opacity="0.5"/></svg>
+      </div>
+      <h3>Double Fonction</h3>
+      <p>Lumière douce + purification de l'air en une seule bougie premium.</p>
+    </div>
+    <div class="feature-card reveal-up delay-2">
+      <div class="feature-icon">
+        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" stroke="#C8A97A" stroke-width="1"/><rect x="18" y="18" width="24" height="24" rx="3" stroke="#C8A97A" stroke-width="1.5"/><path d="M24 24h12M24 30h8" stroke="#C8A97A" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Design Élégant</h3>
+      <p>Un objet décoratif raffiné qui sublime chaque espace de vie.</p>
+    </div>
+    <div class="feature-card reveal-up delay-3">
+      <div class="feature-icon">
+        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" stroke="#C8A97A" stroke-width="1"/><path d="M20 38 Q30 15 40 38" stroke="#C8A97A" stroke-width="1.5" stroke-linecap="round"/><circle cx="30" cy="38" r="3" fill="#C8A97A"/></svg>
+      </div>
+      <h3>Longue Durée</h3>
+      <p>Jusqu'à 40 heures de combustion continue pour un plaisir durable.</p>
+    </div>
+    <div class="feature-card reveal-up delay-4">
+      <div class="feature-icon">
+        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" stroke="#C8A97A" stroke-width="1"/><path d="M20 32 Q25 20 30 28 Q35 36 40 22" stroke="#C8A97A" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
+      </div>
+      <h3>Atmosphère Apaisante</h3>
+      <p>Crée une ambiance de calme et de sérénité dans votre quotidien.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section class="products-preview" id="products">
+  <div class="section-label reveal-up">Notre Collection</div>
+  <h2 class="section-title reveal-up delay-1">Produits <em>Phares</em></h2>
+
+  <div class="products-grid" id="featured-products">
+    <!-- Populated by JS -->
+  </div>
+
+  <div class="text-center reveal-up">
+    <a href="pages/products.html" class="btn-primary">Voir tout</a>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how-section" id="how">
+  <div class="how-bg-image" style="background-image: url('images/candle_dome.jpeg')"></div>
+  <div class="how-overlay"></div>
+  <div class="how-content">
+    <div class="section-label reveal-up" style="color:#C8A97A">Comment ça marche</div>
+    <h2 class="section-title reveal-up delay-1" style="color:#fff">La science derrière <em>la flamme</em></h2>
+    <div class="steps-list">
+      <div class="step reveal-left delay-1">
+        <div class="step-num">01</div>
+        <div class="step-text">
+          <h4>Activation thermique</h4>
+          <p>La flamme active le processus thermocatalytique.</p>
+        </div>
+      </div>
+      <div class="step reveal-left delay-2">
+        <div class="step-num">02</div>
+        <div class="step-text">
+          <h4>Interaction moléculaire</h4>
+          <p>La chaleur interagit avec les particules de l'air environnant.</p>
+        </div>
+      </div>
+      <div class="step reveal-left delay-3">
+        <div class="step-num">03</div>
+        <div class="step-text">
+          <h4>Transformation</h4>
+          <p>Le processus aide à transformer l'atmosphère ambiante.</p>
+        </div>
+      </div>
+      <div class="step reveal-left delay-4">
+        <div class="step-num">04</div>
+        <div class="step-text">
+          <h4>Espace purifié</h4>
+          <p>L'espace devient plus frais et plus équilibré.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery-section" id="gallery">
+  <div class="section-label reveal-up">Galerie</div>
+  <h2 class="section-title reveal-up delay-1">L'art de <em>la lumière</em></h2>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal-up delay-1">
+      <img src="images/candle_glass.jpeg" alt="LUMYRA bougie verre" loading="lazy">
+      <div class="gallery-overlay"><span>Élégance</span></div>
+    </div>
+    <div class="gallery-item tall reveal-up delay-2">
+      <img src="images/candle_dark.jpeg" alt="LUMYRA ambiance" loading="lazy">
+      <div class="gallery-overlay"><span>Ambiance</span></div>
+    </div>
+    <div class="gallery-item reveal-up delay-3">
+      <img src="images/candle_flow.jpeg" alt="LUMYRA flow" loading="lazy">
+      <div class="gallery-overlay"><span>Sérénité</span></div>
+    </div>
+    <div class="gallery-item reveal-up delay-4">
+      <img src="images/thank_you_card.jpeg" alt="LUMYRA card" loading="lazy">
+      <div class="gallery-overlay"><span>Luxe</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials-section" id="testimonials">
+  <div class="section-label reveal-up">Avis clients</div>
+  <h2 class="section-title reveal-up delay-1">Ils nous <em>font confiance</em></h2>
+  <div class="testimonials-slider">
+    <div class="testimonial-card active">
+      <div class="stars">★★★★★</div>
+      <p>"Mon intérieur se sent plus frais et plus paisible. Je ne peux plus m'en passer."</p>
+      <div class="client-name">— Sarah M.</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"Un design magnifique et une atmosphère incroyable. C'est le cadeau parfait."</p>
+      <div class="client-name">— Karim B.</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"Un mélange parfait d'élégance et d'innovation. LUMYRA a transformé mon salon."</p>
+      <div class="client-name">— Leila A.</div>
+    </div>
+  </div>
+  <div class="slider-dots" id="slider-dots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+  </div>
+</section>
+
+<!-- ===== CTA BANNER ===== -->
+<section class="cta-section reveal-up">
+  <div class="cta-inner">
+    <p class="cta-eyebrow">Offre spéciale</p>
+    <h2>Allumez votre espace <em>dès aujourd'hui</em></h2>
+    <p>Livraison nationale disponible. Paiement sécurisé.</p>
+    <a href="pages/products.html" class="btn-primary">Commander maintenant</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo"><span class="logo-l">L</span>UMYRA</div>
+      <p>Tiny flame, huge impact.</p>
+      <div class="social-links">
+        <a href="https://instagram.com/lumyra_urx" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <h5>Navigation</h5>
+      <a href="pages/about.html">À Propos</a>
+      <a href="pages/products.html">Produits</a>
+      <a href="pages/contact.html">Contact</a>
+    </div>
+    <div class="footer-links">
+      <h5>Légal</h5>
+      <a href="#">Politique de confidentialité</a>
+      <a href="#">Conditions générales</a>
+      <a href="#">Politique de remboursement</a>
+    </div>
+    <div class="footer-links">
+      <h5>Contact</h5>
+      <a href="mailto:contact@lumyra.com">contact@lumyra.com</a>
+      <a href="https://instagram.com/lumyra_urx">@lumyra_urx</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 LUMYRA. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script src="js/db.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

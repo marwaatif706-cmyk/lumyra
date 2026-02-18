@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMYRA – Dashboard Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body { cursor: default; }
+    .cursor-dot, .cursor-ring { display: none; }
+    .admin-tab-content { display: none; }
+    .admin-tab-content.active { display: block; }
+  </style>
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+
+<!-- Navbar -->
+<nav class="navbar scrolled" id="navbar" style="background:rgba(62,32,16,0.97);border-bottom:1px solid rgba(200,169,122,0.2);">
+  <div class="nav-logo" style="color:var(--white);"><span class="logo-l">L</span>UMYRA <span style="font-size:0.6rem;letter-spacing:0.2em;color:var(--gold);margin-left:0.5rem;">ADMIN</span></div>
+  <div class="nav-actions">
+    <button onclick="logout()" style="background:none;border:1px solid rgba(200,169,122,0.4);color:rgba(255,255,255,0.7);padding:0.4rem 1rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:0.3s;" onmouseenter="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseleave="this.style.borderColor='rgba(200,169,122,0.4)';this.style.color='rgba(255,255,255,0.7)'">Déconnexion</button>
+  </div>
+</nav>
+
+<div class="admin-page" style="padding-top:70px;">
+  <!-- Sidebar -->
+  <div class="admin-sidebar">
+    <div style="padding:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:1rem;">
+      <div style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);">Tableau de bord</div>
+    </div>
+    <a href="#" class="active" onclick="showTab('dashboard',this)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="#" onclick="showTab('orders',this)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+      Commandes
+    </a>
+    <a href="#" onclick="showTab('users',this)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      Utilisateurs
+    </a>
+    <a href="#" onclick="showTab('messages',this)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Messages
+    </a>
+    <a href="#" onclick="showTab('products',this)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+      Produits
+    </a>
+    <div style="position:absolute;bottom:2rem;left:0;right:0;padding:0 1rem;">
+      <a href="../index.html" style="font-size:0.72rem;color:rgba(255,255,255,0.4);display:block;text-align:center;padding:0.7rem;transition:0.3s;" onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='rgba(255,255,255,0.4)'">← Voir le site</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="admin-main">
+
+    <!-- DASHBOARD TAB -->
+    <div id="tab-dashboard" class="admin-tab-content active">
+      <h1 class="admin-title">Bonjour, <em style="font-style:italic;color:var(--gold);">Admin</em> 👋</h1>
+      <div class="stats-grid" id="stats-grid"></div>
+
+      <div class="data-table">
+        <div class="data-table-header">
+          <h3>Dernières commandes</h3>
+        </div>
+        <div id="recent-orders-table"></div>
+      </div>
+    </div>
+
+    <!-- ORDERS TAB -->
+    <div id="tab-orders" class="admin-tab-content">
+      <h1 class="admin-title">Commandes</h1>
+      <div class="data-table">
+        <div class="data-table-header">
+          <h3>Toutes les commandes</h3>
+          <div id="order-count" style="font-size:0.75rem;color:var(--gray);"></div>
+        </div>
+        <div id="all-orders-table"></div>
+      </div>
+    </div>
+
+    <!-- USERS TAB -->
+    <div id="tab-users" class="admin-tab-content">
+      <h1 class="admin-title">Utilisateurs</h1>
+      <div class="data-table">
+        <div class="data-table-header">
+          <h3>Tous les utilisateurs</h3>
+          <div id="user-count" style="font-size:0.75rem;color:var(--gray);"></div>
+        </div>
+        <div id="users-table"></div>
+      </div>
+    </div>
+
+    <!-- MESSAGES TAB -->
+    <div id="tab-messages" class="admin-tab-content">
+      <h1 class="admin-title">Messages</h1>
+      <div id="messages-list"></div>
+    </div>
+
+    <!-- PRODUCTS TAB -->
+    <div id="tab-products" class="admin-tab-content">
+      <h1 class="admin-title">Catalogue Produits</h1>
+      <div class="data-table">
+        <div class="data-table-header"><h3>Produits actifs</h3></div>
+        <table>
+          <thead><tr><th>ID</th><th>Produit</th><th>Prix</th><th>Stock</th><th>Durée</th></tr></thead>
+          <tbody id="products-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../js/db.js"></script>
+<script>
+// Auth check
+const user = DB.getCurrentUser();
+if (!user || user.role !== 'admin') {
+  window.location.href = 'login.html';
+}
+
+function showTab(name, el) {
+  document.querySelectorAll('.admin-tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-sidebar a').forEach(a => a.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  if (el) el.classList.add('active');
+  renderTab(name);
+}
+
+function renderTab(name) {
+  if (name === 'dashboard') renderDashboard();
+  if (name === 'orders') renderOrders();
+  if (name === 'users') renderUsers();
+  if (name === 'messages') renderMessages();
+  if (name === 'products') renderProducts();
+}
+
+function renderDashboard() {
+  const orders = DB.getOrders();
+  const users = DB.getUsers().filter(u => u.role !== 'admin');
+  const revenue = orders.reduce((s, o) => s + o.total, 0);
+  const messages = JSON.parse(localStorage.getItem('lumyra_messages') || '[]');
+
+  document.getElementById('stats-grid').innerHTML = `
+    <div class="stat-card"><div class="stat-value">${orders.length}</div><div class="stat-label">Commandes</div></div>
+    <div class="stat-card"><div class="stat-value">${users.length}</div><div class="stat-label">Clients</div></div>
+    <div class="stat-card"><div class="stat-value">${revenue} MAD</div><div class="stat-label">Chiffre d'affaires</div></div>
+    <div class="stat-card"><div class="stat-value">${messages.length}</div><div class="stat-label">Messages</div></div>
+  `;
+
+  const recent = orders.slice(0, 5);
+  document.getElementById('recent-orders-table').innerHTML = recent.length === 0
+    ? '<p style="padding:2rem;color:var(--gray);text-align:center;">Aucune commande pour le moment.</p>'
+    : `<table><thead><tr><th>ID</th><th>Client</th><th>Montant</th><th>Status</th><th>Date</th></tr></thead><tbody>
+    ${recent.map(o => `<tr>
+      <td style="font-size:0.72rem;color:var(--gray);">${o.id}</td>
+      <td>${o.userName}</td>
+      <td style="color:var(--gold);font-weight:600;">${o.total} MAD</td>
+      <td><span class="badge badge-pending">${o.status}</span></td>
+      <td style="font-size:0.75rem;color:var(--gray);">${new Date(o.createdAt).toLocaleDateString('fr-FR')}</td>
+    </tr>`).join('')}
+    </tbody></table>`;
+}
+
+function renderOrders() {
+  const orders = DB.getOrders();
+  document.getElementById('order-count').textContent = `${orders.length} commande(s)`;
+  document.getElementById('all-orders-table').innerHTML = orders.length === 0
+    ? '<p style="padding:2rem;color:var(--gray);text-align:center;">Aucune commande.</p>'
+    : `<table><thead><tr><th>ID</th><th>Client</th><th>Produits</th><th>Total</th><th>Status</th><th>Action</th><th>Date</th></tr></thead><tbody>
+    ${orders.map(o => `<tr>
+      <td style="font-size:0.7rem;color:var(--gray);">${o.id}</td>
+      <td>${o.userName}</td>
+      <td style="font-size:0.78rem;">${o.items.map(i => i.name).join(', ')}</td>
+      <td style="color:var(--gold);font-weight:600;">${o.total} MAD</td>
+      <td><span class="badge badge-pending">${o.status}</span></td>
+      <td>
+        <select onchange="DB.updateOrderStatus('${o.id}',this.value);renderOrders();" style="font-size:0.72rem;padding:0.3rem;border:1px solid var(--beige-dark);border-radius:2px;background:var(--cream);cursor:pointer;">
+          <option ${o.status==='En attente'?'selected':''}>En attente</option>
+          <option ${o.status==='Confirmée'?'selected':''}>Confirmée</option>
+          <option ${o.status==='Expédiée'?'selected':''}>Expédiée</option>
+          <option ${o.status==='Livrée'?'selected':''}>Livrée</option>
+          <option ${o.status==='Annulée'?'selected':''}>Annulée</option>
+        </select>
+      </td>
+      <td style="font-size:0.75rem;color:var(--gray);">${new Date(o.createdAt).toLocaleDateString('fr-FR')}</td>
+    </tr>`).join('')}
+    </tbody></table>`;
+}
+
+function renderUsers() {
+  const users = DB.getUsers();
+  document.getElementById('user-count').textContent = `${users.length} utilisateur(s)`;
+  document.getElementById('users-table').innerHTML = `<table>
+    <thead><tr><th>ID</th><th>Nom</th><th>Email</th><th>Rôle</th><th>Commandes</th><th>Inscrit le</th></tr></thead>
+    <tbody>${users.map(u => `<tr>
+      <td style="font-size:0.7rem;color:var(--gray);">${u.id}</td>
+      <td>${u.name}</td>
+      <td>${u.email}</td>
+      <td><span class="badge ${u.role==='admin'?'badge-admin':'badge-user'}">${u.role}</span></td>
+      <td>${(u.orders || []).length}</td>
+      <td style="font-size:0.75rem;color:var(--gray);">${new Date(u.createdAt).toLocaleDateString('fr-FR')}</td>
+    </tr>`).join('')}
+    </tbody></table>`;
+}
+
+function renderMessages() {
+  const messages = JSON.parse(localStorage.getItem('lumyra_messages') || '[]');
+  const container = document.getElementById('messages-list');
+  if (messages.length === 0) {
+    container.innerHTML = '<p style="text-align:center;color:var(--gray);padding:3rem;">Aucun message reçu.</p>';
+    return;
+  }
+  container.innerHTML = messages.map(m => `
+    <div class="data-table" style="margin-bottom:1rem;">
+      <div class="data-table-header">
+        <h3>${m.name} <span style="font-size:0.75rem;color:var(--gray);font-weight:300;">— ${m.email}</span></h3>
+        <div style="font-size:0.72rem;color:var(--gray);">${new Date(m.date).toLocaleDateString('fr-FR')}</div>
+      </div>
+      <div style="padding:1rem 1.5rem;">
+        ${m.subject ? `<div style="font-size:0.75rem;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;">${m.subject}</div>` : ''}
+        <p style="font-size:0.85rem;color:var(--gray);line-height:1.7;">${m.message}</p>
+      </div>
+    </div>`).join('');
+}
+
+function renderProducts() {
+  document.getElementById('products-table-body').innerHTML = DB.products.map(p => `
+    <tr>
+      <td style="font-size:0.75rem;color:var(--gray);">${p.id}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:0.8rem;">
+          <img src="${p.image}" style="width:40px;height:40px;object-fit:cover;border-radius:3px;">
+          <span>${p.name}</span>
+        </div>
+      </td>
+      <td style="color:var(--gold);font-weight:600;">${p.price} MAD</td>
+      <td>${p.stock > 10 ? `<span class="badge badge-success">${p.stock} unités</span>` : `<span class="badge badge-pending">${p.stock} unités</span>`}</td>
+      <td>${p.burnTime}</td>
+    </tr>`).join('');
+}
+
+function logout() {
+  DB.clearSession();
+  window.location.href = 'login.html';
+}
+
+// Init
+renderDashboard();
+
+// Particles for admin (subtle)
+const canvas = document.getElementById('particles-canvas');
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.opacity = '0.15';
+  const particles = [];
+  for (let i = 0; i < 25; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 1.5 + 0.3,
+      sx: (Math.random() - 0.5) * 0.3,
+      sy: -Math.random() * 0.3,
+      opacity: Math.random() * 0.4 + 0.1
+    });
+  }
+  function anim() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.sx; p.y += p.sy;
+      if (p.y < -5) { p.y = canvas.height; p.x = Math.random() * canvas.width; }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,169,122,${p.opacity})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(anim);
+  }
+  anim();
+}
+</script>
+</body>
+</html>

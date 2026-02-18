@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMYRA – Panier</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<canvas id="particles-canvas"></canvas>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-logo"><a href="../index.html"><span class="logo-l">L</span>UMYRA</a></div>
+  <ul class="nav-links">
+    <li><a href="../index.html" class="nav-link">Accueil</a></li>
+    <li><a href="about.html" class="nav-link">À Propos</a></li>
+    <li><a href="products.html" class="nav-link">Produits</a></li>
+    <li><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="cart.html" class="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count" id="cart-count">0</span></a>
+    <a href="login.html" class="btn-nav" id="auth-btn">Se connecter</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Accueil</a>
+  <a href="products.html">Produits</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="cart-page">
+  <h1 style="font-family:var(--font-serif);font-size:2.5rem;font-weight:300;color:var(--brown-dark);margin-bottom:2.5rem;">Mon <em style="color:var(--gold);font-style:italic;">Panier</em></h1>
+  <div id="cart-content"></div>
+</div>
+
+<!-- Order Modal -->
+<div id="order-modal" style="display:none;position:fixed;inset:0;background:rgba(26,26,26,0.6);z-index:5000;display:none;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(8px);">
+  <div style="background:var(--white);border-radius:6px;max-width:500px;width:100%;padding:3rem;position:relative;">
+    <button onclick="document.getElementById('order-modal').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--brown);">✕</button>
+    <h2 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:300;color:var(--brown-dark);margin-bottom:1.5rem;">Finaliser la <em style="color:var(--gold);font-style:italic;">commande</em></h2>
+    <div class="form-group"><label>Nom complet</label><input type="text" id="o-name" placeholder="Votre nom"></div>
+    <div class="form-group"><label>Email</label><input type="email" id="o-email" placeholder="votre@email.com"></div>
+    <div class="form-group"><label>Adresse de livraison</label><textarea id="o-address" placeholder="Rue, ville, code postal..." style="min-height:80px;"></textarea></div>
+    <div class="form-group">
+      <label>Mode de paiement</label>
+      <select id="o-payment">
+        <option value="cod">Paiement à la livraison</option>
+        <option value="online">Paiement en ligne</option>
+      </select>
+    </div>
+    <div id="o-total" style="font-family:var(--font-serif);font-size:1.4rem;color:var(--gold);margin-bottom:1.5rem;"></div>
+    <button class="btn-primary btn-full" onclick="placeOrder()">Confirmer la commande</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="footer-logo"><span class="logo-l">L</span>UMYRA</div><p>Tiny flame, huge impact.</p></div>
+    <div class="footer-links"><h5>Navigation</h5><a href="../index.html">Accueil</a><a href="products.html">Produits</a></div>
+    <div class="footer-links"><h5>Contact</h5><a href="mailto:contact@lumyra.com">contact@lumyra.com</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 LUMYRA. Tous droits réservés.</p></div>
+</footer>
+
+<script src="../js/db.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+<script>
+function renderCart() {
+  const cart = DB.getCart();
+  const container = document.getElementById('cart-content');
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <div class="empty-cart">
+        <div style="font-size:4rem;margin-bottom:1rem;">🕯️</div>
+        <p>Votre panier est vide</p>
+        <a href="products.html" class="btn-primary" style="display:inline-block;margin-top:1.5rem;">Découvrir nos produits</a>
+      </div>`;
+    return;
+  }
+  const total = DB.getCartTotal();
+  const shipping = total > 300 ? 0 : 30;
+  const grand = total + shipping;
+  container.innerHTML = `
+    <div class="cart-layout">
+      <div>
+        ${cart.map(item => `
+          <div class="cart-item">
+            <div class="cart-item-img"><img src="${item.image}" alt="${item.name}"></div>
+            <div>
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">${item.price} MAD</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.7rem;">
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty(${item.productId}, -1)">−</button>
+                <span style="font-size:0.9rem;min-width:20px;text-align:center;">${item.qty}</span>
+                <button class="qty-btn" onclick="changeQty(${item.productId}, 1)">+</button>
+              </div>
+              <div style="font-size:0.8rem;color:var(--brown-dark);font-weight:400;">${item.price * item.qty} MAD</div>
+              <button onclick="DB.removeFromCart(${item.productId});renderCart();" style="background:none;border:none;color:var(--gray);font-size:0.72rem;letter-spacing:0.1em;cursor:pointer;">Supprimer</button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="cart-summary">
+        <h3>Résumé</h3>
+        <div class="summary-line"><span>Sous-total</span><span>${total} MAD</span></div>
+        <div class="summary-line"><span>Livraison</span><span>${shipping === 0 ? 'Gratuite' : shipping + ' MAD'}</span></div>
+        ${shipping > 0 ? `<div style="font-size:0.72rem;color:var(--gray);margin-bottom:0.5rem;">Livraison gratuite dès 300 MAD</div>` : ''}
+        <div class="summary-total"><span>Total</span><span>${grand} MAD</span></div>
+        <button class="btn-primary btn-full" onclick="openOrderModal(${grand})">Commander</button>
+        <a href="products.html" style="display:block;text-align:center;margin-top:1rem;font-size:0.75rem;color:var(--gray);letter-spacing:0.1em;">← Continuer les achats</a>
+      </div>
+    </div>`;
+}
+
+function changeQty(productId, delta) {
+  const cart = DB.getCart();
+  const item = cart.find(i => i.productId === productId);
+  if (item) {
+    const newQty = item.qty + delta;
+    if (newQty < 1) { DB.removeFromCart(productId); }
+    else { DB.updateQty(productId, newQty); }
+    renderCart();
+  }
+}
+
+function openOrderModal(grand) {
+  const user = DB.getCurrentUser();
+  if (user) {
+    document.getElementById('o-name').value = user.name;
+    document.getElementById('o-email').value = user.email;
+  }
+  document.getElementById('o-total').textContent = `Total: ${grand} MAD`;
+  document.getElementById('order-modal').style.display = 'flex';
+}
+
+function placeOrder() {
+  const name = document.getElementById('o-name').value.trim();
+  const email = document.getElementById('o-email').value.trim();
+  const address = document.getElementById('o-address').value.trim();
+  if (!name || !email || !address) {
+    DB.showToast('Veuillez remplir tous les champs.'); return;
+  }
+  const user = DB.getCurrentUser();
+  const userId = user ? user.id : 'guest_' + Date.now();
+  const cart = DB.getCart();
+  const total = DB.getCartTotal();
+  DB.createOrder(userId, name, cart, total, address);
+  DB.clearCart();
+  document.getElementById('order-modal').style.display = 'none';
+  document.getElementById('cart-content').innerHTML = `
+    <div class="order-success">
+      <div class="order-success-icon">🎉</div>
+      <h2>Commande confirmée !</h2>
+      <p style="color:var(--gray);font-size:0.88rem;margin-bottom:2rem;">Merci ${name}, votre commande a bien été enregistrée. Vous recevrez une confirmation sous peu.</p>
+      <a href="products.html" class="btn-primary">Continuer les achats</a>
+    </div>`;
+  DB.updateCartUI();
+}
+
+renderCart();
+</script>
+</body>
+</html>

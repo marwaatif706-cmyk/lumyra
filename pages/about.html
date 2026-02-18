@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMYRA – À Propos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<canvas id="particles-canvas"></canvas>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-logo"><a href="../index.html"><span class="logo-l">L</span>UMYRA</a></div>
+  <ul class="nav-links">
+    <li><a href="../index.html" class="nav-link">Accueil</a></li>
+    <li><a href="about.html" class="nav-link active">À Propos</a></li>
+    <li><a href="products.html" class="nav-link">Produits</a></li>
+    <li><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="cart.html" class="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count" id="cart-count">0</span></a>
+    <a href="login.html" class="btn-nav" id="auth-btn">Se connecter</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Accueil</a>
+  <a href="about.html">À Propos</a>
+  <a href="products.html">Produits</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-header">
+  <div style="position:absolute;inset:0;background:url('../images/candle_flow.jpeg') center/cover;opacity:0.2;"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(62,32,16,0.9),rgba(107,66,38,0.7));"></div>
+  <div class="page-header-content">
+    <div class="section-label" style="color:var(--gold-light);margin-bottom:0.7rem;">Notre Histoire</div>
+    <h1>À <em>Propos</em></h1>
+    <p>La vision derrière LUMYRA</p>
+  </div>
+</div>
+
+<!-- Our Idea -->
+<section class="about-section">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal-up">
+      <img src="../images/candle_glass.jpeg" alt="LUMYRA" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <div class="about-text">
+      <div class="section-label reveal-up">Notre Idée</div>
+      <h2 class="section-title reveal-up delay-1" style="text-align:left;font-size:2.5rem;">L'esthétique au service <em>de l'innovation</em></h2>
+      <p class="reveal-up delay-2">LUMYRA est née d'une conviction simple : les espaces intérieurs méritent d'être purs, calmes et inspirants. Nous avons créé une bougie qui va au-delà de la simple lumière.</p>
+      <p class="reveal-up delay-3">Notre approche combine des matériaux premium, un design contemporain et une technologie de purification thermocatalytique pour offrir une expérience inégalée dans votre quotidien.</p>
+      <p class="reveal-up delay-4">Chaque bougie LUMYRA est pensée pour être non seulement fonctionnelle, mais aussi un véritable objet de décoration qui sublime votre intérieur.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Mission Vision -->
+<section style="padding:6rem 4rem;background:var(--cream);">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;">
+    <div class="feature-card reveal-up delay-1" style="text-align:center;">
+      <div style="font-size:2rem;margin-bottom:1rem;">🎯</div>
+      <h3 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:400;color:var(--gold);margin-bottom:0.7rem;">Notre Mission</h3>
+      <p style="font-size:0.85rem;color:var(--gray);line-height:1.8;">Concevoir des produits élégants qui améliorent la vie quotidienne en combinant lumière, atmosphère et technologie moderne.</p>
+    </div>
+    <div class="feature-card reveal-up delay-2" style="text-align:center;">
+      <div style="font-size:2rem;margin-bottom:1rem;">🌟</div>
+      <h3 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:400;color:var(--gold);margin-bottom:0.7rem;">Notre Vision</h3>
+      <p style="font-size:0.85rem;color:var(--gray);line-height:1.8;">Devenir une marque de style de vie de référence dans le bien-être intérieur et le design domestique innovant.</p>
+    </div>
+    <div class="feature-card reveal-up delay-3" style="text-align:center;">
+      <div style="font-size:2rem;margin-bottom:1rem;">💡</div>
+      <h3 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:400;color:var(--gold);margin-bottom:0.7rem;">Notre Promesse</h3>
+      <p style="font-size:0.85rem;color:var(--gray);line-height:1.8;">Chaque produit LUMYRA est une promesse d'excellence, de sécurité et de raffinement pour transformer votre espace.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Values -->
+<section style="padding:6rem 4rem;background:var(--white);">
+  <div class="section-label reveal-up">Ce qui nous guide</div>
+  <h2 class="section-title reveal-up delay-1">Nos <em>Valeurs</em></h2>
+  <div class="values-grid">
+    <div class="value-item reveal-up delay-1">
+      <div class="value-icon">✨</div>
+      <h4>Innovation</h4>
+    </div>
+    <div class="value-item reveal-up delay-2">
+      <div class="value-icon">💧</div>
+      <h4>Pureté</h4>
+    </div>
+    <div class="value-item reveal-up delay-3">
+      <div class="value-icon">🏆</div>
+      <h4>Élégance</h4>
+    </div>
+    <div class="value-item reveal-up delay-1">
+      <div class="value-icon">🌿</div>
+      <h4>Bien-être</h4>
+    </div>
+    <div class="value-item reveal-up delay-2">
+      <div class="value-icon">♻️</div>
+      <h4>Responsabilité</h4>
+    </div>
+    <div class="value-item reveal-up delay-3">
+      <div class="value-icon">🤝</div>
+      <h4>Confiance</h4>
+    </div>
+  </div>
+</section>
+
+<!-- Image strip -->
+<section style="display:grid;grid-template-columns:repeat(3,1fr);height:350px;">
+  <div style="overflow:hidden;"><img src="../images/candle_dark.jpeg" alt="LUMYRA" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;" onmouseenter="this.style.transform='scale(1.06)'" onmouseleave="this.style.transform='scale(1)'"></div>
+  <div style="overflow:hidden;"><img src="../images/thank_you_card.jpeg" alt="LUMYRA" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;" onmouseenter="this.style.transform='scale(1.06)'" onmouseleave="this.style.transform='scale(1)'"></div>
+  <div style="overflow:hidden;"><img src="../images/candle_flow.jpeg" alt="LUMYRA" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;" onmouseenter="this.style.transform='scale(1.06)'" onmouseleave="this.style.transform='scale(1)'"></div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="cta-eyebrow">Rejoignez la famille LUMYRA</p>
+    <h2>Découvrez notre <em>collection</em></h2>
+    <p>Des bougies pensées pour vous, pour votre espace, pour votre bien-être.</p>
+    <a href="products.html" class="btn-primary">Voir les produits</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="footer-logo"><span class="logo-l">L</span>UMYRA</div><p>Tiny flame, huge impact.</p></div>
+    <div class="footer-links"><h5>Navigation</h5><a href="../index.html">Accueil</a><a href="products.html">Produits</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links"><h5>Légal</h5><a href="#">Confidentialité</a><a href="#">CGV</a></div>
+    <div class="footer-links"><h5>Contact</h5><a href="mailto:contact@lumyra.com">contact@lumyra.com</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 LUMYRA. Tous droits réservés.</p></div>
+</footer>
+
+<script src="../js/db.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

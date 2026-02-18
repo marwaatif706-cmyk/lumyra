@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMYRA – Connexion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<canvas id="particles-canvas"></canvas>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-logo"><a href="../index.html"><span class="logo-l">L</span>UMYRA</a></div>
+  <ul class="nav-links">
+    <li><a href="../index.html" class="nav-link">Accueil</a></li>
+    <li><a href="about.html" class="nav-link">À Propos</a></li>
+    <li><a href="products.html" class="nav-link">Produits</a></li>
+    <li><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="cart.html" class="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count" id="cart-count">0</span></a>
+    <a href="login.html" class="btn-nav active" id="auth-btn">Se connecter</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Accueil</a>
+  <a href="about.html">À Propos</a>
+  <a href="products.html">Produits</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-logo"><span class="logo-l">L</span>UMYRA</div>
+    <p class="auth-subtitle">Connectez-vous à votre compte</p>
+
+    <div class="error-msg" id="error-msg"></div>
+    <div class="success-msg" id="success-msg"></div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="votre@email.com">
+    </div>
+    <div class="form-group">
+      <label>Mot de passe</label>
+      <input type="password" id="password" placeholder="••••••••">
+    </div>
+    <button class="btn-primary btn-full" onclick="handleLogin()">Se connecter</button>
+    <p class="auth-switch">Pas encore de compte ? <a href="register.html">Créer un compte</a></p>
+    <p class="auth-switch" style="margin-top:0.5rem; font-size:0.72rem; color:#bbb;">Admin: admin@lumyra.com / admin123</p>
+  </div>
+</div>
+
+<script src="../js/db.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+<script>
+function handleLogin() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const errorEl = document.getElementById('error-msg');
+  const successEl = document.getElementById('success-msg');
+  errorEl.style.display = 'none';
+  successEl.style.display = 'none';
+
+  if (!email || !password) {
+    errorEl.textContent = 'Veuillez remplir tous les champs.';
+    errorEl.style.display = 'block'; return;
+  }
+  const result = DB.loginUser(email, password);
+  if (result.error) {
+    errorEl.textContent = result.error;
+    errorEl.style.display = 'block'; return;
+  }
+  DB.setSession(result.user);
+  successEl.textContent = `Bienvenue, ${result.user.name} !`;
+  successEl.style.display = 'block';
+  setTimeout(() => {
+    window.location.href = result.user.role === 'admin' ? 'admin.html' : '../index.html';
+  }, 1000);
+}
+
+document.querySelectorAll('input').forEach(inp => {
+  inp.addEventListener('keypress', e => { if (e.key === 'Enter') handleLogin(); });
+});
+
+// Redirect if already logged in
+const user = DB.getCurrentUser();
+if (user) window.location.href = user.role === 'admin' ? 'admin.html' : '../index.html';
+</script>
+</body>
+</html>
